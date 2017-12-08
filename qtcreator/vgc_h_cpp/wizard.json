@@ -1,0 +1,107 @@
+{
+    "version": 1,
+    "supportedProjectTypes": [ ],
+    "id": "A.VGC_H_CPP",
+    "category": "A.VGC",
+    "trDescription": "Creates a C++ header and source file with VGC boilerplate.",
+    "trDisplayName": "Header and Source",
+    "trDisplayCategory": "VGC",
+    "enabled": "%{JS: [ %{Plugins} ].indexOf('CppEditor') >= 0}",
+
+    "options":
+    [
+        { "key": "TargetPath", "value": "%{Path}" },
+        { "key": "HdrPath", "value": "%{Path}/%{HdrFileName}" },
+        { "key": "SrcPath", "value": "%{Path}/%{SrcFileName}" },
+        { "key": "GUARD", "value": "%{JS: 'VGC_%{Library}_%{Name}_H'.toUpperCase()}" }
+    ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": "Define Header and Source Files",
+            "trShortTitle": "Details",
+            "typeId": "Fields",
+            "data" :
+            [
+                {
+                    "name": "Library",
+                    "trDisplayName": "Library:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+                    "data": { "validator": "[a-z_0-9]+" }
+                },
+
+                {
+                    "name": "Name",
+                    "trDisplayName": "Name:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+                    "data": { "validator": "[a-z_0-9]+" }
+                },
+
+                {
+                    "name": "Sp2",
+                    "type": "Spacer",
+                    "data": { "size": 12 }
+                },
+
+                {
+                    "name": "HdrFileName",
+                    "type": "LineEdit",
+                    "trDisplayName": "Header file:",
+                    "mandatory": true,
+                    "data": { "trText": "%{Name}.h" }
+                },
+                {
+                    "name": "SrcFileName",
+                    "type": "LineEdit",
+                    "trDisplayName": "Source file:",
+                    "mandatory": true,
+                    "data": { "trText": "%{Name}.cpp" }
+                },
+                {
+                    "name": "Path",
+                    "type": "PathChooser",
+                    "trDisplayName": "Path:",
+                    "mandatory": true,
+                    "data":
+                    {
+                        "kind": "existingDirectory",
+                        "basePath": "%{InitialPath}",
+                        "path": "%{InitialPath}"
+                    }
+                }
+            ]
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "Summary"
+        }
+    ],
+
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                {
+                    "source": "file.h",
+                    "target": "%{HdrPath}",
+                    "openInEditor": true,
+                    "options": [
+                    ]
+                },
+                {
+                    "source": "file.cpp",
+                    "target": "%{SrcPath}",
+                    "openInEditor": true,
+                    "options": [
+                    ]
+                }
+            ]
+        }
+    ]
+}
