@@ -1,18 +1,15 @@
 In this folder, you can find useful files to configure/extend Qt Creator.
 
-# VGC Header and Source File wizard
+You can either copy the whole content of this folder to your Qt Creator
+config folder (e.g., ~/.config/QtProject/qtcreator/), or only copy what
+you care about. Restart Qt Creator for the new config to take effect.
 
-Installation:
 
-1. Copy vgc_h_cpp into
-   ```
-   ~/.config/QtProject/qtcreator/templates/wizards/
-   ```
-   (Create the parent folders if they do not exist)
+# New File Wizards (automatic license boilerplate, namespaces, includes, etc.)
 
-2. Restart Qt Creator
+These go to ~/.config/QtProject/qtcreator/templates/wizards/
 
-Usage:
+Example Usage:
 
 1. In Qt Creator, open an existing file in the same directory of the
    files you want to create
@@ -25,6 +22,12 @@ Usage:
 
 This will create the files `geometry/curve.h` and `geometry/curve.cpp` with
 all the standard VGC boilerplate.
+
+# Text Editor Color Schemes
+
+These go to ~/.config/QtProject/qtcreator/styles/
+
+After restarting QtCreator, select your desired scheme in Tools > Options > Text Editor > Fonts and Colors.
 
 # How to create new JSON-based Wizards?
 
