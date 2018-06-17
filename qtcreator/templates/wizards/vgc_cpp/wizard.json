@@ -12,7 +12,8 @@
     [
         { "key": "TargetPath", "value": "%{Path}" },
         { "key": "SrcPath", "value": "%{Path}/%{SrcFileName}" },
-        { "key": "GUARD", "value": "%{JS: 'VGC_%{Library}_%{Name}_H'.toUpperCase()}" }
+        { "key": "GUARD", "value": "%{JS: 'VGC_%{Library}_%{Name}_H'.toUpperCase()}" },
+        { "key": "Year", "value": "%{JS: (new Date()).getFullYear()}" }
     ],
 
     "pages":
