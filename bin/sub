@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Adapted from https://sublimetext.userecho.com/topics/2589-when-opening-a-new-file-from-the-command-line-sublime-should-focus-the-window-that-already-contains/
+
+# Count how many window is open before opening Sublime
+window_count=$(wmctrl -l | wc -l)
+
+# Open all files and directory in one new window
+subl -n "$@" &
+
+# Wait until the window is opened
+new_window_count=$(wmctrl -l | wc -l)
+while [ "$window_count" -eq "$new_window_count" ]
+do
+    sleep 0.01
+    new_window_count=$(wmctrl -l | wc -l)
+done
+
+# Give focus based on files
+for f in "$@"
+do
+    if [ ! -d "$f" ]
+    then
+        d=$(cd "$(dirname "$f")" 2>/dev/null && pwd | sed -e "s|^$HOME|~|")
+        b=$(basename -- "$f")
+        if [ `wmctrl -l | grep -c "$d/$b"` != 0 ] ; then
+          wmctrl -a "$d/$b" &
+        fi
+    fi
+done
+
+
+# Give focus based on directories
+dirnames=""
+comma=", "
+for f in "$@"
+do
+    if [ -d "$f" ]
+    then
+        b=$(basename -- "$f")
+        if [ -z "$dirnames" ]
+        then
+            dirnames="$b"
+        else
+            dirnames="$dirnames$comma$b"
+        fi
+    fi
+done
+dirnames="($dirnames)"
+if [ `wmctrl -l | grep -c "$dirnames"` != 0 ]
+then
+    wmctrl -a "$dirnames" &
+fi

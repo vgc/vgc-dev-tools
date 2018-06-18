@@ -61,3 +61,11 @@ When I copy-paste code, I like it to be automatically re-indented in case the
 source indentation level differs from the destination indentation level. This
 can be done by assigning the "paste_and_indent" command to "ctrl+v", see
 [Packages/User/Default (Linux).sublime-keymap](Packages/User/Default (Linux).sublime-keymap)
+
+## Open File in New Sublime Window
+
+By default, when you open a file in Sublime from the command line, it will open
+it as a new tab in an existing Sublime window (if any). I prefer them to be
+always opened in a new window, which can be done by placing the
+[`../bin/sub`](../bin/sub) in your `~/bin` folder, and invoking Sublime via the
+`sub` command.

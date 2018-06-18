@@ -2,6 +2,11 @@
 
 This repository stores useful tools to make development of VGC easier.
 
+bin
+---
+
+Contains useful Linux scripts to put in your ~/bin
+
 qtcreator
 ---------
 
