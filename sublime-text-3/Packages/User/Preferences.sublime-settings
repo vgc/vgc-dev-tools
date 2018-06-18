@@ -1,0 +1,12 @@
+{
+	"WrapPlus.break_on_hyphens": false,
+	"WrapPlus.wrap_width": 80,
+	"detect_indentation": true,
+	"ensure_newline_at_eof_on_save": true,
+	"hot_exit": false,
+	"remember_open_files": false,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"use_tab_stops": true
+}

@@ -9,6 +9,11 @@ Provides Qt Creator configuration files for proper indentation settings,
 and templates to create new classes with license boilerplate, namespace, and
 header guards.
 
+sublime-text-3
+--------------
+
+Provides Sublime configuration files.
+
 update_copyright.sh
 -------------------
 
