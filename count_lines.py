@@ -2,10 +2,12 @@
 
 import os
 import glob
+import shutil # for rmtree (= "rm -Rf")
+import subprocess # for git (note: in the future, we may want to use GitPython instead)
 import sys
 
 if len(sys.argv) < 2:
-    print('Usage: ./count_lines.py <vgc-root-dir>')
+    print('Usage: ./count_lines.py <vgc-root-dir> [--historical [numCommits]]')
     exit()
 
 # Each line in source files is classified into one of the following categories:
@@ -300,7 +302,7 @@ def dirCount(dir, count):
             if filepath.endswith(".qss") :
                 qssCount(filepath, count, isTestDir, isWrapDir)
 
-def countLines(rootDir):
+def getCurrentCount(rootDir):
     count = LineCounts()
     dirCount(os.path.join(rootDir, 'apps'), count)
     dirCount(os.path.join(rootDir, 'cmake'), count)
@@ -378,8 +380,36 @@ def printCount(count):
     print("  Code:    " + str(totalCode))
 
 def printCurrentCount(rootDir):
-    count = countLines(rootDir)
+    count = getCurrentCount(rootDir)
     printCount(count)
 
+def printHistoricalCount(rootDir):
+    curDir = os.path.abspath(os.curdir)
+    tmpDir = os.path.abspath("count_lines_tmp")
+
+    subprocess.run(["git",  "clone", "-q", rootDir, tmpDir])
+
+    os.chdir(tmpDir)
+
+    count = getCurrentCount(tmpDir)
+    print(count.cppCode)
+
+    numCommits = 10
+    if len(sys.argv) > 3:
+        numCommits = int(sys.argv[3])
+
+    for i in range(numCommits):
+        subprocess.run(["git",  "checkout", "-q", "HEAD^"])
+        count = getCurrentCount(tmpDir)
+        print(count.cppCode)
+
+    shutil.rmtree(tmpDir)
+
 rootDir = os.path.abspath(sys.argv[1])
-printCurrentCount(rootDir)
+if len(sys.argv) > 2:
+    if sys.argv[2] == "--historical":
+        printHistoricalCount(rootDir)
+    else:
+        print("Unknown option " + sys.argv[2])
+else:
+    printCurrentCount(rootDir)
