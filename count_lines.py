@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import os
 import glob
@@ -311,7 +311,25 @@ def getCurrentCount(rootDir):
     return count
 
 def printCount(count):
-    print("C++ Line Counts: " + str(
+    totalBlank = count.cppBlank + count.pyBlank + count.cmakeBlank + count.glslBlank + count.qssBlank
+    totalLegal = count.cppLegal + count.pyLegal + count.cmakeLegal + count.glslLegal + count.qssLegal
+    totalComment = count.cppComment + count.pyComment + count.cmakeComment + count.glslComment + count.qssComment
+    totalDoc = count.cppDoc + count.pyDoc + count.cmakeDoc + count.glslDoc + count.qssDoc
+    totalTest = count.cppTest + count.pyTest + count.cmakeTest + count.glslTest + count.qssTest
+    totalWrap = count.cppWrap + count.pyWrap + count.cmakeWrap + count.glslWrap + count.qssWrap
+    totalCode = count.cppCode + count.pyCode + count.cmakeCode + count.glslCode + count.qssCode
+
+    print("Total Line Counts: " + str(
+        totalBlank + totalLegal + totalComment + totalDoc + totalTest + totalWrap + totalCode))
+    print("  Blank:   " + str(totalBlank))
+    print("  Legal:   " + str(totalLegal))
+    print("  Comment: " + str(totalComment))
+    print("  Doc:     " + str(totalDoc))
+    print("  Test:    " + str(totalTest))
+    print("  Wrap:    " + str(totalWrap))
+    print("  Code:    " + str(totalCode))
+
+    print("\nC++ Line Counts: " + str(
         count.cppBlank + count.cppLegal + count.cppComment + count.cppDoc + count.cppTest + count.cppWrap + count.cppCode))
     print("  Blank:   " + str(count.cppBlank))
     print("  Legal:   " + str(count.cppLegal))
@@ -361,6 +379,42 @@ def printCount(count):
     print("  Wrap:    " + str(count.qssWrap))
     print("  Code:    " + str(count.qssCode))
 
+def printInline(s):
+    print(s, end='')
+
+class Csv:
+    def __init__(self):
+        self.first_ = True
+
+    def printValue(self, s):
+        if self.first_:
+            self.first_ = False
+        else:
+            printInline(',')
+        printInline(s)
+
+
+    def printNewline(self):
+        printInline('\n')
+
+def beginCsv(s):
+    global csvIsBegin_
+    csvIsBegin_ = True
+
+def endCsv(s):
+    global csvIsBegin_
+    csvIsBegin_ = Fal
+
+    printInline(s)
+
+def printCsv(s):
+    printInline(s)
+
+def printCountOneLine(date, count):
+    csv = Csv()
+
+    csv.printValue(date)
+
     totalBlank = count.cppBlank + count.pyBlank + count.cmakeBlank + count.glslBlank + count.qssBlank
     totalLegal = count.cppLegal + count.pyLegal + count.cmakeLegal + count.glslLegal + count.qssLegal
     totalComment = count.cppComment + count.pyComment + count.cmakeComment + count.glslComment + count.qssComment
@@ -369,15 +423,123 @@ def printCount(count):
     totalWrap = count.cppWrap + count.pyWrap + count.cmakeWrap + count.glslWrap + count.qssWrap
     totalCode = count.cppCode + count.pyCode + count.cmakeCode + count.glslCode + count.qssCode
 
-    print("\nTOTAL Line Counts: " + str(
-        totalBlank + totalLegal + totalComment + totalDoc + totalTest + totalWrap + totalCode))
-    print("  Blank:   " + str(totalBlank))
-    print("  Legal:   " + str(totalLegal))
-    print("  Comment: " + str(totalComment))
-    print("  Doc:     " + str(totalDoc))
-    print("  Test:    " + str(totalTest))
-    print("  Wrap:    " + str(totalWrap))
-    print("  Code:    " + str(totalCode))
+    csv.printValue(totalBlank + totalLegal + totalComment + totalDoc + totalTest + totalWrap + totalCode)
+    csv.printValue(totalBlank)
+    csv.printValue(totalLegal)
+    csv.printValue(totalComment)
+    csv.printValue(totalDoc)
+    csv.printValue(totalTest)
+    csv.printValue(totalWrap)
+    csv.printValue(totalCode)
+
+    csv.printValue(count.cppBlank + count.cppLegal + count.cppComment + count.cppDoc + count.cppTest + count.cppWrap + count.cppCode)
+    csv.printValue(count.cppBlank)
+    csv.printValue(count.cppLegal)
+    csv.printValue(count.cppComment)
+    csv.printValue(count.cppDoc)
+    csv.printValue(count.cppTest)
+    csv.printValue(count.cppWrap)
+    csv.printValue(count.cppCode)
+
+    csv.printValue(count.pyBlank + count.pyLegal + count.pyComment + count.pyDoc + count.pyTest + count.pyWrap + count.pyCode)
+    csv.printValue(count.pyBlank)
+    csv.printValue(count.pyLegal)
+    csv.printValue(count.pyComment)
+    csv.printValue(count.pyDoc)
+    csv.printValue(count.pyTest)
+    csv.printValue(count.pyWrap)
+    csv.printValue(count.pyCode)
+
+    csv.printValue(count.cmakeBlank + count.cmakeLegal + count.cmakeComment + count.cmakeDoc + count.cmakeTest + count.cmakeWrap + count.cmakeCode)
+    csv.printValue(count.cmakeBlank)
+    csv.printValue(count.cmakeLegal)
+    csv.printValue(count.cmakeComment)
+    csv.printValue(count.cmakeDoc)
+    csv.printValue(count.cmakeTest)
+    csv.printValue(count.cmakeWrap)
+    csv.printValue(count.cmakeCode)
+
+    csv.printValue(count.glslBlank + count.glslLegal + count.glslComment + count.glslDoc + count.glslTest + count.glslWrap + count.glslCode)
+    csv.printValue(count.glslBlank)
+    csv.printValue(count.glslLegal)
+    csv.printValue(count.glslComment)
+    csv.printValue(count.glslDoc)
+    csv.printValue(count.glslTest)
+    csv.printValue(count.glslWrap)
+    csv.printValue(count.glslCode)
+
+    csv.printValue(count.qssBlank + count.qssLegal + count.qssComment + count.qssDoc + count.qssTest + count.qssWrap + count.qssCode)
+    csv.printValue(count.qssBlank)
+    csv.printValue(count.qssLegal)
+    csv.printValue(count.qssComment)
+    csv.printValue(count.qssDoc)
+    csv.printValue(count.qssTest)
+    csv.printValue(count.qssWrap)
+    csv.printValue(count.qssCode)
+
+    csv.printNewline()
+
+def printCountOneLineHeader():
+
+    csv = Csv()
+
+    csv.printValue("Commit date/time")
+
+    csv.printValue("Total")
+    csv.printValue("Blank")
+    csv.printValue("Legal")
+    csv.printValue("Comment")
+    csv.printValue("Doc")
+    csv.printValue("Test")
+    csv.printValue("Wrap")
+    csv.printValue("Code")
+
+    csv.printValue("C++ (Total)")
+    csv.printValue("C++ (Blank)")
+    csv.printValue("C++ (Legal)")
+    csv.printValue("C++ (Comment)")
+    csv.printValue("C++ (Doc)")
+    csv.printValue("C++ (Test)")
+    csv.printValue("C++ (Wrap)")
+    csv.printValue("C++ (Code)")
+
+    csv.printValue("Python (Total)")
+    csv.printValue("Python (Blank)")
+    csv.printValue("Python (Legal)")
+    csv.printValue("Python (Comment)")
+    csv.printValue("Python (Doc)")
+    csv.printValue("Python (Test)")
+    csv.printValue("Python (Wrap)")
+    csv.printValue("Python (Code)")
+
+    csv.printValue("CMake (Total)")
+    csv.printValue("CMake (Blank)")
+    csv.printValue("CMake (Legal)")
+    csv.printValue("CMake (Comment)")
+    csv.printValue("CMake (Doc)")
+    csv.printValue("CMake (Test)")
+    csv.printValue("CMake (Wrap)")
+    csv.printValue("CMake (Code)")
+
+    csv.printValue("GLSL (Total)")
+    csv.printValue("GLSL (Blank)")
+    csv.printValue("GLSL (Legal)")
+    csv.printValue("GLSL (Comment)")
+    csv.printValue("GLSL (Doc)")
+    csv.printValue("GLSL (Test)")
+    csv.printValue("GLSL (Wrap)")
+    csv.printValue("GLSL (Code)")
+
+    csv.printValue("Qt Stylesheet (Total)")
+    csv.printValue("Qt Stylesheet (Blank)")
+    csv.printValue("Qt Stylesheet (Legal)")
+    csv.printValue("Qt Stylesheet (Comment)")
+    csv.printValue("Qt Stylesheet (Doc)")
+    csv.printValue("Qt Stylesheet (Test)")
+    csv.printValue("Qt Stylesheet (Wrap)")
+    csv.printValue("Qt Stylesheet (Code)")
+
+    csv.printNewline()
 
 def printCurrentCount(rootDir):
     count = getCurrentCount(rootDir)
@@ -387,23 +549,43 @@ def printHistoricalCount(rootDir):
     curDir = os.path.abspath(os.curdir)
     tmpDir = os.path.abspath("count_lines_tmp")
 
+    if os.path.isdir(tmpDir):
+        shutil.rmtree(tmpDir)
+
     subprocess.run(["git",  "clone", "-q", rootDir, tmpDir])
 
     os.chdir(tmpDir)
 
-    count = getCurrentCount(tmpDir)
-    print(count.cppCode)
-
-    numCommits = 10
+    maxCommits = -1
     if len(sys.argv) > 3:
-        numCommits = int(sys.argv[3])
+        maxCommits = int(sys.argv[3])
 
-    for i in range(numCommits):
-        subprocess.run(["git",  "checkout", "-q", "HEAD^"])
-        count = getCurrentCount(tmpDir)
-        print(count.cppCode)
+    printCountOneLineHeader()
 
-    shutil.rmtree(tmpDir)
+    numCommits = 0
+    while maxCommits == -1 or numCommits < maxCommits:
+        if numCommits > 0:
+            subprocess.run(["git",  "checkout", "-q", "HEAD^"])
+        numCommits += 1
+
+        # Get commit date and time as per git "iso" format: "2018-08-08 15:40:31 +0200"
+        commitDatetime = subprocess.check_output(["git",  "show", "-s", "--date=iso", "--format=format:%ad"]).decode('utf8')
+
+        # Get commit date and time as ISO 8601: "2018-08-08T15:40:31+0200"
+        commitDatetime = commitDatetime.replace(" ", "T", 1)
+        commitDatetime = commitDatetime.replace(" ", "", 1)
+
+        try:
+            count = getCurrentCount(tmpDir)
+            printCountOneLine(commitDatetime, count)
+        except FileNotFoundError:
+            # This is raised when 'CMakeLists.txt' is not found, which happens for the first
+            # few commits of the VGC git repository. This is a good moment to break out of
+            # the loop
+            maxCommits = 0
+
+    if os.path.isdir(tmpDir):
+        shutil.rmtree(tmpDir)
 
 rootDir = os.path.abspath(sys.argv[1])
 if len(sys.argv) > 2:
