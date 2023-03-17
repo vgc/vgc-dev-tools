@@ -4,8 +4,10 @@
 #
 # 1. Install Python 3 (minimum 3.6) on your computer.
 #
-# 2. Download this file to your computer, for example in
-#    your "Downloads" folder.
+# 2. Download this file to your computer, for example on GitHub:
+#    - Click on the "Raw" button
+#    - Choose "Save As" in your browser (typically Ctrl+S)
+#    - Save it for example to your "Downloads" folder
 #
 # 3. In a command line, execute this python script with the name
 #    of the VGC file you want to convert, for example:
