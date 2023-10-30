@@ -25,6 +25,37 @@ Changelog:
 
     <highlighting>
         <list name="properties">
+            <!-- VGC properties -->
+            <item>horizontal-stretch</item>
+            <item>vertical-stretch</item>
+            <item>horizontal-shrink</item>
+            <item>vertical-shrink</item>
+
+            <item>preferred-width</item>
+            <item>preferred-height</item>
+
+            <item>pixel-hinting</item>
+            <item>font-ascent</item>
+            <item>font-descent</item>
+
+            <item>text-vertical-align</item>
+            <item>text-horizontal-align</item>
+
+            <item>main-alignment</item>
+            <item>main-spacing</item>
+            <item>cross-alignment</item>
+
+            <item>text-color</item>
+            <item>text-selection-color</item>
+            <item>text-selection-background-color</item>
+            <item>icon-foreground-color</item>
+            <item>icon-accent-color</item>
+            <item>background-color-on-hover</item>
+
+            <item>handle-size</item>
+            <item>handle-hovered-size</item>
+            <item>handle-hovered-color</item>
+
             <!-- W3C > Work Draft, from https://www.w3.org/Style/CSS/all-properties -->
             <item>align-content</item>
             <item>align-items</item>
@@ -645,6 +676,17 @@ Changelog:
         </list>
 
         <list name="values">
+            <!-- VGC Values -->
+            <item>start</item>
+            <item>end</item>
+            <item>center</item>
+            <item>packed</item>
+            <item>space-between</item>
+            <item>space-around</item>
+            <item>space-evenly</item>
+            <item>force-stretch</item>
+
+            <!-- CSS Values -->
             <item>none</item>
             <item>hidden</item>
             <item>dotted</item>
